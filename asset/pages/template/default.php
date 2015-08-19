@@ -5,13 +5,20 @@
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="asset/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="asset/css/stylesheet.css"  media="screen,projection"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
     <body>
     <img src="asset/picture/Banner.png" class="responsive-image">
-    <nav class="nav"></nav>
+    <nav class="nav"><a href="#!" class="brand-logo">FGN_STUDIO</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href=""><i class="material-icons">search</i></a></li>
+        <li><a href=""><i class="material-icons">view_module</i></a></li>
+        <li><a href=""><i class="material-icons">refresh</i></a></li>
+        <li><a href=""><i class="material-icons">more_vert</i></a></li>
+      </ul></nav>
 
        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -96,7 +103,7 @@
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2014 Copyright FGN_STUDIO
+            © 2014 Copyright FGN_STUDIO by Krokilex and moiDarvoisien because the cake is the lie
             </div>
           </div>
         </footer>
