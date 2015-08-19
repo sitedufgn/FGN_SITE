@@ -17,10 +17,10 @@
     <a href="#!"><img src="asset/picture/Banner.png" class="responsive-image"></a>
     <nav class="nav"><a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="?=home">Accueil</a></li>
-        <li><a href="?=video">Vidéos</a></li>
-        <li><a href="?=news">News</a></li>
-        <li><a href="?=contact">Nous contacter</a></li>
+        <li><a href="?p=home">Accueil</a></li>
+        <li><a href="?p=video">Vidéos</a></li>
+        <li><a href="?p=news">News</a></li>
+        <li><a href="?p=contact">Nous contacter</a></li>
       </ul></nav>
 
        <div class="container">
