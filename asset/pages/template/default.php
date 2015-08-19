@@ -40,6 +40,7 @@
                   <li><a class="grey-text text-lighten-3" href="https://twitter.com/FGN_STUDIO">Twitter</a></li>
                   <li><a class="grey-text text-lighten-3" href="https://www.youtube.com/channel/UCPu4nUy9cRmji4G-O5M0l8g">Youtube</a></li>
                   <li><a class="grey-text text-lighten-3" href="#!">Connection</a></li>
+                  
                 </ul>
               </div>
             </div>
