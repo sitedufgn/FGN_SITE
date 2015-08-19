@@ -14,7 +14,7 @@
     </head>
 
     <body>
-    <img src="asset/picture/Banner.png" class="responsive-image">
+    <a href="#!"><img src="asset/picture/Banner.png" class="responsive-image"></a>
     <nav class="nav"><a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="">Accueil</a></li>
