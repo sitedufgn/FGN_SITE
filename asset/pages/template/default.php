@@ -11,8 +11,10 @@
 
     <body>
 
+ <div class="container">
+        <?= $content ?>
+      </div>
     	
-    	<?= $content ?>
 
 
     	    <footer class="page-footer">
