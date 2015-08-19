@@ -12,20 +12,20 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-
+          <title>FGN_STUDIO</title>
     <body>
     <a href="#!"><img src="asset/picture/Banner.png" class="responsive-image"></a>
     <nav class="nav"><a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="">Accueil</a></li>
-        <li><a href="">Vidéos</a></li>
-        <li><a href="">News</a></li>
-        <li><a href="">Nous contacter</a></li>
+        <li><a href="?=home">Accueil</a></li>
+        <li><a href="?=video">Vidéos</a></li>
+        <li><a href="?=news">News</a></li>
+        <li><a href="?=contact">Nous contacter</a></li>
       </ul></nav>
 
-       
-        
-
+       <div class="container">
+          <?= $content ?>
+        </div>  
 
     	    <footer class="page-footer footer">
           <div class="container">

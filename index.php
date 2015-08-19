@@ -7,11 +7,13 @@ if(isset($_GET['p'])) {
 }
 ob_start();
 if($p === 'home') {
-	require 'asset/pages/index.html';
-}elseif($p === 'about') {
-	require 'asset/pages/about.html';
+	require 'asset/pages/index.php';
+}elseif($p === 'news') {
+	require 'asset/pages/news.php';
 }elseif($p === 'contact') {
-	require 'asset/pages/contact.html';
+	require 'asset/pages/contact.php';
+}elseif($p === 'video') {
+	require 'asset/pages/video.php';
 }
 $content = ob_get_clean();
 require 'asset/pages/template/default.php';
