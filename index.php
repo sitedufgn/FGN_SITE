@@ -5,7 +5,7 @@ if(isset($_GET['p'])) {
 } else {
 	$p = 'home';
 }
-// ob_start();
+ob_start();
 if($p === 'home') {
 	require 'asset/pages/index.html';
 }elseif($p === 'about') {
@@ -13,5 +13,5 @@ if($p === 'home') {
 }elseif($p === 'contact') {
 	require 'asset/pages/contact.html';
 }
-// $content = ob_get_clean();
-// require 'asset/pages/template/default.php';
+$content = ob_get_clean();
+require 'asset/pages/template/default.php';
