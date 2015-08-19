@@ -10,7 +10,8 @@
     </head>
 
     <body>
-
+ <img style="width:100%;height:auto;max-height:500px;" src="asset/picture/Banner.png">
+    <nav></nav>
 
         <?= $content ?>
 
