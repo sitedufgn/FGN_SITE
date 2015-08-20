@@ -23,6 +23,7 @@
         <li><a href="?p=contact">Nous contacter</a></li>
       </ul></nav>
 
+
        <div class="container">
           <?= $content ?>
         </div>  
@@ -53,5 +54,14 @@
         </footer>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="asset/js/materialize.min.js"></script>
+      <script src="dist/slideout.min.js"></script>
+<script>
+  var slideout = new Slideout({
+    'panel': document.getElementById('panel'),
+    'menu': document.getElementById('menu'),
+    'padding': 256,
+    'tolerance': 70
+  });
+</script>
     </body>
   </html>

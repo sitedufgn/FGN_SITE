@@ -14,6 +14,8 @@ if($p === 'home') {
 	require 'asset/pages/contact.php';
 }elseif($p === 'video') {
 	require 'asset/pages/video.php';
+}elseif($p === 'test') {
+	require 'asset/pages/test.php';
 }
 $content = ob_get_clean();
 require 'asset/pages/template/default.php';
