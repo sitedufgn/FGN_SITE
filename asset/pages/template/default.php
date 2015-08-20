@@ -15,12 +15,17 @@
           <title>FGN_STUDIO</title>
     <body>
     <a href="#!"><img src="asset/picture/Banner.png" class="responsive-image"></a>
-    <nav class="nav"><a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
+
+    <nav class="nav">
+      
+      <a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
+      
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="?p=home">Accueil</a></li>
-        <li><a href="?p=video">Vidéos</a></li>
-        <li><a href="?p=news">News</a></li>
-        <li><a href="?p=contact">Nous contacter</a></li>
+        <li><a href="?p=home">Accueil</a></li> <li><a href="?p=video">Vidéos</a></li> <li><a href="?p=news">News</a></li> <li><a href="?p=contact">Nous contacter</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="?p=home">Accueil</a></li> <li><a href="?p=video">Vidéos</a></li> <li><a href="?p=news">News</a></li> <li><a href="?p=contact">Nous contacter</a></li>
       </ul></nav>
      
 
@@ -32,6 +37,7 @@
     	    <footer class="page-footer footer">
           <div class="container">
             <div class="row">
+              
               <div class="col l6 s12">
                 <h5 class="white-text">FGN_STUDIO</h5>
                 <p class="grey-text text-lighten-4">Le site officiel du FGN_STUDIO</p>
@@ -55,6 +61,6 @@
         </footer>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="asset/js/materialize.min.js"></script>
-
+     <script>$(".button-collapse").sideNav();</script>
     </body>
   </html>
