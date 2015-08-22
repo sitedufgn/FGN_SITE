@@ -8,7 +8,7 @@
               tempor incididunt ut labore et dolore magna aliqua...</p>
             </div>
             <div class="card-action">
-              <a href="#">je crois que c'est un lien</a>
+              <a href="?p=article">je crois que c'est un lien</a>
             </div>
           </div>
         </div>
@@ -22,9 +22,8 @@
               tempor incididunt ut labore et dolore magna aliqua...</p>
             </div>
             <div class="card-action">
-              <a href="#">je crois que c'est un lien</a>
+              <a href="?p=article">je crois que c'est un lien</a>
             </div>
           </div>
         </div>
       </div>
-    
