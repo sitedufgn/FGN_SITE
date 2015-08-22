@@ -14,11 +14,11 @@
     </head>
           <title>FGN_STUDIO</title>
     <body>
-    <a href="#!"><img src="asset/picture/Banner.png" class="responsive-image"></a>
+    <a href="?p=home"><img src="asset/picture/Banner.png" class="responsive-image"></a>
 
     <nav class="nav">
       
-      <a href="#!" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
+      <a href="?p=home" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
       
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
