@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteRule home index.php?p=home
+RewriteRule video index.php?p=video
+RewriteRule news index.php?p=news
+RewriteRule contact index.php?p=contact
+RewriteRule article index.php?p=article

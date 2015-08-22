@@ -14,18 +14,18 @@
     </head>
           <title>FGN_STUDIO</title>
     <body>
-    <a href="?p=home"><img src="asset/picture/Banner.png" class="responsive-image"></a>
+    <a href="home"><img src="asset/picture/Banner.png" class="responsive-image"></a>
 
     <nav class="nav">
       
-      <a href="?p=home" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
+      <a href="home" class="brand-logo nav-FGN"><strong>FGN_STUDIO</strong></a>
       
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="?p=home">Accueil</a></li> <li><a href="?p=video">Vidéos</a></li> <li><a href="?p=news">News</a></li> <li><a href="?p=contact">Nous contacter</a></li>
+        <li><a href="home">Accueil</a></li> <li><a href="video">Vidéos</a></li> <li><a href="news">News</a></li> <li><a href="contact">Nous contacter</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="?p=home">Accueil</a></li> <li><a href="?p=video">Vidéos</a></li> <li><a href="?p=news">News</a></li> <li><a href="?p=contact">Nous contacter</a></li>
+        <li><a href="home">Accueil</a></li> <li><a href="video">Vidéos</a></li> <li><a href="news">News</a></li> <li><a href="contact">Nous contacter</a></li>
       </ul></nav>
      
 
