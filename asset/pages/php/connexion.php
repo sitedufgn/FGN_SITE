@@ -3,7 +3,7 @@
 if(isset($_POST['submit'])) { 
     
     if(empty($_POST['login'])) {
-        header('Location: asset/pages/connexion.php');
+        header('Location: connexion');
         exit;
     } else {
       
@@ -23,13 +23,13 @@ if(isset($_POST['submit'])) {
                 $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
                 
                 if(mysqli_num_rows($Requete) == 0) {
-                    header('Location: asset/pages/connexion.php');
+                    header('Location: connexion');
                     exit;
                 } else {
                     $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$Pseudo."'");
                     $exec = $grade
                     $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $grade);
-                    header('Location: asset/pages/TheCakeIsALie.htrollml');
+                    header('Location: JTM.html');
                     exit;
                 }
             }
