@@ -3,8 +3,7 @@
 if(isset($_POST['submit'])) { 
     
     if(empty($_POST['login'])) {
-        header('Location: connexion');
-        exit;
+         echo 'nop';
     } else {
       
         if(empty($_POST['password'])) {
@@ -22,15 +21,13 @@ if(isset($_POST['submit'])) {
                 
                 $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
                 
-                if(mysqli_num_rows($Requete) == 0) {
-                    header('Location: connexion');
-                    echo "nop";
+                if(mysqli_num_rows($requete) === 0) {
+                    echo 'nope';
                     exit;
                 } else {
                     $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$Pseudo."'");
-                    $exec = $grade;
-                    $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $grade);
-                    echo "<h1><strong>SA MARCHE BITCH</strong></h1>";
+                    $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $exec);
+                    echo '<h1><strong>SA MARCHE BITCH</strong></h1>';
                     exit;
                 }
             }
