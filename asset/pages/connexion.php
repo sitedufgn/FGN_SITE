@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 if(isset($_POST['submit'])) { 
     
     if(empty($_POST['login'])) {
@@ -29,7 +29,10 @@ if(isset($_POST['submit'])) {
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
                     $_SESSION['grade'] = $exec;
+<<<<<<< HEAD
                     print_r($_SESSION['grade']);
+=======
+>>>>>>> origin/master
                     header('Location:');
                     exit;
                 }
