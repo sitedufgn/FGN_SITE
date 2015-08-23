@@ -26,11 +26,11 @@ if(isset($_POST['submit'])) {
                     exit;
                 } else {
                     $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$login."'");
-                    $grade = $exec;
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
-                    $_SESSION['grade'] = $grade;
-                    header('Location:home');
+                    $_SESSION['grade'] = $exec;
+                    echo $_SESSION['grade'];
+                    header('Location:');
                     exit;
                 }
             }
