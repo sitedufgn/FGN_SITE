@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
                 
                 $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$login."' AND pass = '".$password."'");
                 
-                if($requete === 0) {
+                if( mysqli_num_rows($requete) === 0) {
                     echo 'nope';
                     exit;
                 } else {
@@ -29,7 +29,7 @@ if(isset($_POST['submit'])) {
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
                     $_SESSION['grade'] = $exec;
-                    echo $_SESSION['grade'];
+                    print_r($_SESSION['grade']);
                     header('Location:');
                     exit;
                 }
