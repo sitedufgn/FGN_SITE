@@ -16,6 +16,8 @@ if($p === 'home') {
 	require 'asset/pages/video.php';
 }elseif($p === 'article') {
 	require 'asset/pages/article.php';
+}elseif($p === 'connexion') {
+	require 'asset/pages/connexion.php';
 }
 $content = ob_get_clean();
 require 'asset/pages/template/default.php';
