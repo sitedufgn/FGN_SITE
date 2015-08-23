@@ -21,13 +21,13 @@ if(isset($_POST['submit'])) {
                 
                 $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
                 
-                if(mysqli_num_rows($requete) === 0) {
+                if($requete === 0) {
                     echo 'nope';
                     exit;
                 } else {
                     $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$Pseudo."'");
                     $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $exec);
-                    echo '<h1><strong>SA MARCHE BITCH</strong></h1>';
+                    header('Location:')
                     exit;
                 }
             }
