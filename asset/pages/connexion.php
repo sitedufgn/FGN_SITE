@@ -15,7 +15,5 @@
     <i class="material-icons">send</i>
   </button>
     </form>
-   
-        
   </div>
-<br><br>
+<br><br><br><br>
