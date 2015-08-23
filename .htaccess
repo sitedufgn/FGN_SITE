@@ -4,3 +4,4 @@ RewriteRule video index.php?p=video
 RewriteRule news index.php?p=news
 RewriteRule contact index.php?p=contact
 RewriteRule article index.php?p=article
+RewriteRule connexion index.php?p=connexion
