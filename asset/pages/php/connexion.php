@@ -1,33 +1,35 @@
 <?php 
 
-if(isset($_POST['connexion'])) { 
+if(isset($_POST['submit'])) { 
     
-    if(empty($_POST['pseudo'])) {
-        header('Location: asset/pages/connexion.php')
+    if(empty($_POST['login'])) {
+        header('Location: asset/pages/connexion.php');
+        exit;
     } else {
       
-        if(empty($_POST['mot_de_passe'])) {
+        if(empty($_POST['password'])) {
         } else {
-            $Pseudo = htmlentities($_POST['pseudo'], ENT_QUOTES, "ISO-8859-1"); 
+            $Pseudo = htmlentities($_POST['login'], ENT_QUOTES, "ISO-8859-1"); 
 
-            $MotDePasse = htmlentities($_POST['mot_de_passe'], ENT_QUOTES, "ISO-8859-1");
+            $MotDePasse = htmlentities($_POST['password'], ENT_QUOTES, "ISO-8859-1");
             $MotDePasse = sha1($MotDePasse);
           
-            $mysqli = mysqli_connect("localhost", "root", "", "streamer");
+            $mysqli = mysqli_connect("localhost", "root", "", "fgn-database");
 
             if(!$mysqli){
                 echo "Erreur de connexion à la base de données.";
             } else {
                 
-                $Requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
+                $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
                 
                 if(mysqli_num_rows($Requete) == 0) {
-                    header('Location: home.html');
+                    header('Location: asset/pages/connexion.php');
                     exit;
                 } else {
-                    
-                    $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse);
-                    header('Location: Panel.php');
+                    $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$Pseudo."'");
+                    $exec = $grade
+                    $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $grade);
+                    header('Location: asset/pages/TheCakeIsALie.htrollml');
                     exit;
                 }
             }
