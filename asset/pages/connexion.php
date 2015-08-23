@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 if(isset($_POST['submit'])) { 
     
     if(empty($_POST['login'])) {
@@ -29,7 +29,6 @@ if(isset($_POST['submit'])) {
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
                     $_SESSION['grade'] = $exec;
-                    echo $_SESSION['grade'];
                     header('Location:');
                     exit;
                 }
