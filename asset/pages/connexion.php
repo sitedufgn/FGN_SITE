@@ -8,10 +8,10 @@ if(isset($_POST['submit'])) {
       
         if(empty($_POST['password'])) {
         } else {
-            $Pseudo = htmlentities($_POST['login'], ENT_QUOTES, "ISO-8859-1"); 
+            $login = htmlentities($_POST['login'], ENT_QUOTES, "ISO-8859-1"); 
 
-            $MotDePasse = htmlentities($_POST['password'], ENT_QUOTES, "ISO-8859-1");
-            $MotDePasse = sha1($MotDePasse);
+            $password = htmlentities($_POST['password'], ENT_QUOTES, "ISO-8859-1");
+            $password = sha1($password);
           
             $mysqli = mysqli_connect("localhost", "root", "", "fgn_database");
 
@@ -19,15 +19,18 @@ if(isset($_POST['submit'])) {
                 echo "Erreur de connexion à la base de données.";
             } else {
                 
-                $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$Pseudo."' AND pass = '".$MotDePasse."'");
+                $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$login."' AND pass = '".$password."'");
                 
                 if($requete === 0) {
                     echo 'nope';
                     exit;
                 } else {
-                    $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$Pseudo."'");
-                    $_SESSION['id'] = $user = array('login' => $Pseudo , 'pass' => $MotDePasse , 'grade' => $exec);
-                    header('Location:')
+                    $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$login."'");
+                    $grade = $exec;
+                    $_SESSION['login'] = $login;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['grade'] = $grade;
+                    header('Location:home');
                     exit;
                 }
             }
