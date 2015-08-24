@@ -29,7 +29,12 @@ if(isset($_POST['submit'])) {
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
                     $_SESSION['grade'] = $exec;
+<<<<<<< HEAD
                      header('Location:');
+=======
+                    print_r($_SESSION['grade']);
+                    header('Location:');
+>>>>>>> origin/master
                     exit;
                 }
             }

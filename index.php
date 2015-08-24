@@ -1,4 +1,5 @@
 <?php 
+require 'vendor/autoload.php';
 if(isset($_GET['p'])) {
 	$p = $_GET['p'];
 
