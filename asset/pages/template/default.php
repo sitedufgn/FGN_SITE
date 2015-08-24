@@ -36,8 +36,10 @@
             <div class="row">
               
               <div class="col l6 s12">
-                <h5 class="white-text">FGN_STUDIO</h5>
-                <p class="grey-text text-lighten-4">Le site officiel du FGN_STUDIO</p>
+                <h5 class="white-text">FGN_STUDIO</h5><script src="https://apis.google.com/js/platform.js"></script>
+
+                                                    <div class="g-ytsubscribe" data-channelid="UCPu4nUy9cRmji4G-O5M0l8g" data-layout="default" data-count="default"></div>
+              <p class="grey-text text-lighten-4">Le site officiel du FGN_STUDIO</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Lien</h5>
