@@ -1,6 +1,6 @@
 <?php  
-require_once 'google-api-php-client/src/Google_Client.php';
-require_once 'google-api-php-client/src/contrib/Google_YouTubeService.php';
+require_once 'vendor/google/apiclient/src/Google/Client.php';
+require_once 'vendor/google/apiclient/src/Google/Service/Youtube.php';
  
 // Set your cached access token. Remember to replace $_SESSION with a real database or memcached.
 session_start();
@@ -8,13 +8,13 @@ session_start();
 // Connect to the Account you want to upload the video to (Note: When Remembering your access code you only need to do this once)
 $client = new Google_Client();
 $client->setApplicationName('Youtube PHP Starter Application');
-$client->setClientId('insert_your_oauth2_client_id');
-$client->setClientSecret('insert_your_oauth2_client_secret');
-$client->setRedirectUri('insert_your_oauth2_redirect_uri');
-$client->setDeveloperKey('insert_your_simple_api_key');
+$client->setClientId('221396606113-tsu47fcv49c3tf0p1due8qsgj6guof8t.apps.googleusercontent.com');
+$client->setClientSecret('K1-go8sbct83weYm8VyNgJrc');
+$client->setRedirectUri('http://localhost/FGN_STUDIO/test');
+$client->setDeveloperKey('AIzaSyDjz0bdB5o9ZX7iWovwx-gMnHWgBIqq5MU');
  
 // Load the Youtube Service Library
-$youtube = new Google_YouTubeService($client);
+$youtube = new YouTubeService($client);
  
 // Authenticate the user when he comes back with the access code
 if (isset($_GET['code']))
