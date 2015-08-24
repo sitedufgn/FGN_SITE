@@ -7,8 +7,8 @@ if(isset($_GET['p'])) {
 }
 ob_start();
 if($p === 'admin') {
-	require 'create.php';
-}elseif($p === 'login') {
+	require 'singup.php';
+}elseif($p === 'news') {
 	require 'create.php';
 }elseif($p === 'wiki') {
 	require 'wiki.php';
