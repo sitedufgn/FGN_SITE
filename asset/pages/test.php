@@ -1,139 +1,86 @@
-<?php
-
-// Call set_include_path() as needed to point to your client library.
-require_once 'vendor/google/apiclient/src/Google/Client.php';
-require_once 'vendor/google/apiclient/src/Google/Service/YouTube.php';
+<?php  
+require_once 'google-api-php-client/src/Google_Client.php';
+require_once 'google-api-php-client/src/contrib/Google_YouTubeService.php';
+ 
+// Set your cached access token. Remember to replace $_SESSION with a real database or memcached.
 session_start();
-
-/*
- * You can acquire an OAuth 2.0 client ID and client secret from the
- * Google Developers Console <https://console.developers.google.com/>
- * For more information about using OAuth 2.0 to access Google APIs, please see:
- * <https://developers.google.com/youtube/v3/guides/authentication>
- * Please ensure that you have enabled the YouTube Data API for your project.
- */
-$OAUTH2_CLIENT_ID = '221396606113-ta6ap9kv7tk7tbajc4n16lh7nj7g3eht.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = 'kCVe8FSi4TLnILN-S8X8ZfxA';
-
+ 
+// Connect to the Account you want to upload the video to (Note: When Remembering your access code you only need to do this once)
 $client = new Google_Client();
-$client->setClientId($OAUTH2_CLIENT_ID);
-$client->setClientSecret($OAUTH2_CLIENT_SECRET);
-$client->setScopes('https://www.googleapis.com/auth/youtube');
-$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-    FILTER_SANITIZE_URL);
-$client->setRedirectUri($redirect);
-
-// Define an object that will be used to make all API requests.
-$youtube = new Google_Service_YouTube($client);
-
-if (isset($_GET['code'])) {
-  if (strval($_SESSION['state']) !== strval($_GET['state'])) {
-    die('The session state did not match.');
-  }
-
-  $client->authenticate($_GET['code']);
-  $_SESSION['token'] = $client->getAccessToken();
-  header('Location: ' . $redirect);
+$client->setApplicationName('Youtube PHP Starter Application');
+$client->setClientId('insert_your_oauth2_client_id');
+$client->setClientSecret('insert_your_oauth2_client_secret');
+$client->setRedirectUri('insert_your_oauth2_redirect_uri');
+$client->setDeveloperKey('insert_your_simple_api_key');
+ 
+// Load the Youtube Service Library
+$youtube = new Google_YouTubeService($client);
+ 
+// Authenticate the user when he comes back with the access code
+if (isset($_GET['code']))
+{
+    $client->authenticate();
+    $_SESSION['token'] = $client->getAccessToken();
+    $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
 }
-
-if (isset($_SESSION['token'])) {
-  $client->setAccessToken($_SESSION['token']);
+ 
+// Check if the Token is set in the Session. If so set it to the client
+if (isset($_SESSION['token']))
+{
+    $client->setAccessToken($_SESSION['token']);
 }
-
-// Check to ensure that the access token was successfully acquired.
-if ($client->getAccessToken()) {
-  try{
-    // REPLACE this value with the path to the file you are uploading.
-    $videoPath = "/path/to/file.mp4";
-
-    // Create a snippet with title, description, tags and category ID
-    // Create an asset resource and set its snippet metadata and type.
-    // This example sets the video's title, description, keyword tags, and
-    // video category.
-    $snippet = new Google_Service_YouTube_VideoSnippet();
-    $snippet->setTitle("Test title");
-    $snippet->setDescription("Test description");
-    $snippet->setTags(array("tag1", "tag2"));
-
-    // Numeric video category. See
-    // https://developers.google.com/youtube/v3/docs/videoCategories/list 
-    $snippet->setCategoryId("22");
-
-    // Set the video's status to "public". Valid statuses are "public",
-    // "private" and "unlisted".
-    $status = new Google_Service_YouTube_VideoStatus();
-    $status->privacyStatus = "public";
-
-    // Associate the snippet and status objects with a new video resource.
-    $video = new Google_Service_YouTube_Video();
-    $video->setSnippet($snippet);
-    $video->setStatus($status);
-
-    // Specify the size of each chunk of data, in bytes. Set a higher value for
-    // reliable connection as fewer chunks lead to faster uploads. Set a lower
-    // value for better recovery on less reliable connections.
-    $chunkSizeBytes = 1 * 1024 * 1024;
-
-    // Setting the defer flag to true tells the client to return a request which can be called
-    // with ->execute(); instead of making the API call immediately.
-    $client->setDefer(true);
-
-    // Create a request for the API's videos.insert method to create and upload the video.
-    $insertRequest = $youtube->videos->insert("status,snippet", $video);
-
-    // Create a MediaFileUpload object for resumable uploads.
-    $media = new Google_Http_MediaFileUpload(
-        $client,
-        $insertRequest,
-        'video/*',
-        null,
-        true,
-        $chunkSizeBytes
-    );
-    $media->setFileSize(filesize($videoPath));
-
-
-    // Read the media file and upload it chunk by chunk.
-    $status = false;
-    $handle = fopen($videoPath, "rb");
-    while (!$status && !feof($handle)) {
-      $chunk = fread($handle, $chunkSizeBytes);
-      $status = $media->nextChunk($chunk);
+ 
+// Check if the client has an access Token elke Give him a login Link
+if ($client->getAccessToken())
+{
+    // Upload the youtube Video
+    try
+    {
+        $path_to_video_to_upload = '/set/the/direct/path/to/your/video.avi';
+ 
+        // Get the Mimetype of your video
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $path_to_video_to_upload);
+ 
+        // Build the Needed Video Information
+        $snippet = new Google_VideoSnippet();
+        $snippet->setTitle('Title Of Video');
+        $snippet->setDescription('Description Of Video');
+        $snippet->setTags(array('Tag 1', 'Tag 2'));
+        $snippet->setCategoryId(22);
+ 
+        // Build the Needed video Status
+        $status = new Google_VideoStatus();
+        $status->setPrivacyStatus('private'); // or public, unlisted
+ 
+        // Set the Video Info and Status in the Main Tag
+        $video = new Google_Video();
+        $video->setSnippet($snippet);
+        $video->setStatus($status);
+ 
+        // Send the video to the Google Youtube API
+        $created_file = $youtube->videos->insert('snippet,status', $video, array(
+            'data' => file_get_contents($path_to_video_to_upload),
+            'mimeType' => $mime_type,
+        ));
+ 
+        // Get the information of the uploaded video
+        print_r($createdFile);
     }
-
-    fclose($handle);
-
-    // If you want to make other calls after the file upload, set setDefer back to false
-    $client->setDefer(false);
-
-
-    $htmlBody .= "<h3>Video Uploaded</h3><ul>";
-    $htmlBody .= sprintf('<li>%s (%s)</li>',
-        $status['snippet']['title'],
-        $status['id']);
-
-    $htmlBody .= '</ul>';
-
-  } catch (Google_Service_Exception $e) {
-    $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
-        htmlspecialchars($e->getMessage()));
-  } catch (Google_Exception $e) {
-    $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
-        htmlspecialchars($e->getMessage()));
-  }
-
-  $_SESSION['token'] = $client->getAccessToken();
-} else {
-  // If the user hasn't authorized the app, initiate the OAuth flow
-  $state = mt_rand();
-  $client->setState($state);
-  $_SESSION['state'] = $state;
-
-  $authUrl = $client->createAuthUrl();
-  $htmlBody = <<<END
-  <h3>Authorization Required</h3>
-  <p>You need to <a href="$authUrl">authorize access</a> before proceeding.<p>
-END;
+    catch (Exception $ex)
+    {
+        echo $ex;
+    }
+ 
+    // We're not done yet. Remember to update the cached access token.
+    // Remember to replace $_SESSION with a real database or memcached.
+    $_SESSION['token'] = $client->getAccessToken();
+}
+else
+{
+    $authUrl = $client->createAuthUrl();
+    print "<a href='$authUrl'>Connect Me!</a>";
 }
 ?>
 <!DOCTYPE html>
