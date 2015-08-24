@@ -19,6 +19,8 @@ if($p === 'home') {
 	require 'asset/pages/article.php';
 }elseif($p === 'connexion') {
 	require 'asset/pages/connexion.php';
+}elseif($p === 'test') {
+	require 'asset/pages/test.php';
 }
 $content = ob_get_clean();
 require 'asset/pages/template/default.php';
