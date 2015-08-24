@@ -1,8 +1,8 @@
 <?php
 
 // Call set_include_path() as needed to point to your client library.
-require_once 'Google/Client.php';
-require_once 'Google/Service/YouTube.php';
+require_once 'vendor/google/apiclient/src/Google/Client.php';
+require_once 'vendor/google/apiclient/src/Google/Service/YouTube.php';
 session_start();
 
 /*
@@ -12,8 +12,8 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
-$OAUTH2_CLIENT_ID = 'REPLACE_ME';
-$OAUTH2_CLIENT_SECRET = 'REPLACE_ME';
+$OAUTH2_CLIENT_ID = '221396606113-ta6ap9kv7tk7tbajc4n16lh7nj7g3eht.apps.googleusercontent.com';
+$OAUTH2_CLIENT_SECRET = 'kCVe8FSi4TLnILN-S8X8ZfxA';
 
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
@@ -142,6 +142,6 @@ END;
 	<title></title>
 </head>
 <body>
-<h1 style="font-size:500px;"><strong>SWAG</strong></h1>
+	<?=$htmlBody?>
 </body>
 </html>
