@@ -5,3 +5,6 @@ RewriteRule news index.php?p=news
 RewriteRule contact index.php?p=contact
 RewriteRule article index.php?p=article
 RewriteRule connexion index.php?p=connexion
+RewriteRule admin/wiki admin/index.php?p=wiki
+RewriteRule admin/upload admin/index.php?p=upload
+RewriteRule admin/news admin/index.php?p=news

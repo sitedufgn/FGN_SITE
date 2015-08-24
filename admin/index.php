@@ -10,6 +10,8 @@ if($p === 'admin') {
 	require 'create.php';
 }elseif($p === 'login') {
 	require 'create.php';
+}elseif($p === 'wiki') {
+	require 'wiki.php';
 }
 $content = ob_get_clean();
 require 'template/default.php';
