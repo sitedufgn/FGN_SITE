@@ -1,94 +1,95 @@
+
 <?php  
-require_once 'google-api-php-client/src/Google_Client.php';
-require_once 'google-api-php-client/src/contrib/Google_YouTubeService.php';
- 
-// Set your cached access token. Remember to replace $_SESSION with a real database or memcached.
-session_start();
- 
-// Connect to the Account you want to upload the video to (Note: When Remembering your access code you only need to do this once)
-$client = new Google_Client();
-$client->setApplicationName('Youtube PHP Starter Application');
-$client->setClientId('insert_your_oauth2_client_id');
-$client->setClientSecret('insert_your_oauth2_client_secret');
-$client->setRedirectUri('insert_your_oauth2_redirect_uri');
-$client->setDeveloperKey('insert_your_simple_api_key');
- 
-// Load the Youtube Service Library
-$youtube = new Google_YouTubeService($client);
- 
-// Authenticate the user when he comes back with the access code
-if (isset($_GET['code']))
-{
-    $client->authenticate();
+  
+  require_once 'vendor/google/apiclient/src/Google/Client.php';
+  require_once 'vendor/google/apiclient/src/Google/Service/YouTube.php';
+  
+  $OAUTH2_CLIENT_ID = "221396606113-v6fkvv17kvb51jkv2t09cdpo13f2el40.apps.googleusercontent.com";
+  $OAUTH2_CLIENT_SECRET = "ZoogSJG5xANAPErqQZ73QzB8";
+
+  $client = new Google_Client();
+  $client->setClientId($OAUTH2_CLIENT_ID);
+  $client->setClientSecret($OAUTH2_CLIENT_SECRET);
+  $client->setRedirectUri('http://local.fr/FGN_SITE/test');
+  $client->setScopes('https://www.googleapis.com/auth/youtube.upload');
+
+  $youtube = new Google_Service_Youtube($client);
+
+  session_start();
+
+  if (isset($_GET['code'])) {
+    $client->authenticate($_GET['code']);
     $_SESSION['token'] = $client->getAccessToken();
-    $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-    header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-}
- 
-// Check if the Token is set in the Session. If so set it to the client
-if (isset($_SESSION['token']))
-{
+    header('Location: http://local.fr/FGN_SITE/test');
+    die();
+  }
+
+  if (isset($_SESSION['token'])) {
     $client->setAccessToken($_SESSION['token']);
-}
+  }
+
+  if ($client->getAccessToken()) {
+    
+    $snippet = new Google_Service_Youtube_VideoSnippet();
+    $snippet->setTitle('Test');
+    $snippet->setDescription('test');
+    $snippet->setTages(['test', 'de', 'tag']);
+    $snippet->setCategoryId(8);
+
+    $status = new Google_Service_Youtube_VideoStatus();
+    $status->setPrivacyStatus('private');
+
+    $video = new Google_Service_Youtube_Video();
+    $video->setSnippet($snippet);
+    $video->setStatus($status);
+
+    $client->setDefer(true);
+    $request = $youtube->videos->insert('status,snippet', $video);
+    $file = dirname('test.avi');
+    $media = new Google_Http_MediaFileUpload($client, $request, 'video/*', file_get_contents($file));
+    $video = $client->execute($request);
+
+  }
+
+  else{
+    ?>
+    <p><a href="<?= $client->createAuthUrl();?>">Autorisation</a></p>
+    <?php
+  }
+
+ ?>
  
-// Check if the client has an access Token elke Give him a login Link
-if ($client->getAccessToken())
-{
-    // Upload the youtube Video
-    try
-    {
-        $path_to_video_to_upload = '/set/the/direct/path/to/your/video.avi';
- 
-        // Get the Mimetype of your video
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime_type = finfo_file($finfo, $path_to_video_to_upload);
- 
-        // Build the Needed Video Information
-        $snippet = new Google_VideoSnippet();
-        $snippet->setTitle('Title Of Video');
-        $snippet->setDescription('Description Of Video');
-        $snippet->setTags(array('Tag 1', 'Tag 2'));
-        $snippet->setCategoryId(22);
- 
-        // Build the Needed video Status
-        $status = new Google_VideoStatus();
-        $status->setPrivacyStatus('private'); // or public, unlisted
- 
-        // Set the Video Info and Status in the Main Tag
-        $video = new Google_Video();
-        $video->setSnippet($snippet);
-        $video->setStatus($status);
- 
-        // Send the video to the Google Youtube API
-        $created_file = $youtube->videos->insert('snippet,status', $video, array(
-            'data' => file_get_contents($path_to_video_to_upload),
-            'mimeType' => $mime_type,
-        ));
- 
-        // Get the information of the uploaded video
-        print_r($createdFile);
-    }
-    catch (Exception $ex)
-    {
-        echo $ex;
-    }
- 
-    // We're not done yet. Remember to update the cached access token.
-    // Remember to replace $_SESSION with a real database or memcached.
-    $_SESSION['token'] = $client->getAccessToken();
-}
-else
-{
-    $authUrl = $client->createAuthUrl();
-    print "<a href='$authUrl'>Connect Me!</a>";
-}
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+  <title></title>
 </head>
 <body>
-	<?=$htmlBody?>
+
+  <div class="row">
+    <form class="col s12" action="test" method="POST">
+      <div class="row">
+        <div class="input-field col s6">
+          <input  type="text" class="validate" name="title">
+          <label for="first_name">Titre</label>
+        </div>
+       </div>
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea  class="materialize-textarea" name="description"></textarea>
+          <label for="textarea1">Description</label>
+        </div>
+      </div>
+      
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons">send</i>
+  </button>
+    </form>
+   
+        
+  </div>
 </body>
 </html>
