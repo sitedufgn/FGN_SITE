@@ -6,4 +6,4 @@ RewriteRule contact index.php?p=contact
 RewriteRule article index.php?p=article
 RewriteRule connexion index.php?p=connexion
 RewriteRule test index.php?p=test
-RewriteRule admin/dashboard index.php?p=dashboard
+RewriteRule dashboard index.php?p=dashboard

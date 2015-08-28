@@ -14,7 +14,7 @@ if(isset($_POST['submit'])) {
             $password = htmlentities($_POST['password'], ENT_QUOTES, "ISO-8859-1");
             $password = sha1($password);
           
-            $mysqli = mysqli_connect("localhost", "fmicjead_FGN", "fgn_studio", "fmicjead_fgn_database");
+            $mysqli = mysqli_connect("localhost", "root", "", "fgn_database");
 
             if(!$mysqli){
                 echo "Erreur de connexion à la base de données.";
