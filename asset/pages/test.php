@@ -10,17 +10,17 @@
   $client = new Google_Client();
   $client->setClientId($OAUTH2_CLIENT_ID);
   $client->setClientSecret($OAUTH2_CLIENT_SECRET);
-  $client->setRedirectUri('http://local.fr/FGN_SITE/test');
+  $client->setRedirectUri('http://moidarvoisien.fr/FGN_SITE/test');
   $client->setScopes('https://www.googleapis.com/auth/youtube.upload');
 
   $youtube = new Google_Service_Youtube($client);
 
   session_start();
-
+  echo $_GET['code'];
   if (isset($_GET['code'])) {
     $client->authenticate($_GET['code']);
     $_SESSION['token'] = $client->getAccessToken();
-    header('Location: http://local.fr/FGN_SITE/test');
+    header('Location:http://moidarvoisien.fr/FGN_SITE/test');
     die();
   }
 
@@ -33,7 +33,7 @@
     $snippet = new Google_Service_Youtube_VideoSnippet();
     $snippet->setTitle('Test');
     $snippet->setDescription('test');
-    $snippet->setTages(['test', 'de', 'tag']);
+    $snippet->setTags(['test', 'de', 'tag']);
     $snippet->setCategoryId(8);
 
     $status = new Google_Service_Youtube_VideoStatus();
@@ -45,7 +45,7 @@
 
     $client->setDefer(true);
     $request = $youtube->videos->insert('status,snippet', $video);
-    $file = dirname('test.avi');
+    $file = dirname('test.mp4');
     $media = new Google_Http_MediaFileUpload($client, $request, 'video/*', file_get_contents($file));
     $video = $client->execute($request);
 
