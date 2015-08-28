@@ -2,7 +2,7 @@
 session_start();
 if(isset($_POST['submit'])) { 
     
-    if(empty($_POST['login'])) {
+    if(!empty($_POST['login'])) {
          echo 'nop';
     } else {
       
@@ -19,21 +19,18 @@ if(isset($_POST['submit'])) {
                 echo "Erreur de connexion à la base de données.";
             } else {
                 
-                $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$login."' AND pass = '".$password."'");
+                $requete = mysqli_query($mysqli,"SELECT * FROM user WHERE login = '".$login."' AND password = '".$password."'");
                 
-                if( mysqli_num_rows($requete) === 0) {
-                    echo 'nope';
+
+                if( mysqli_num_rows($requete) == 0) {
+                    echo 'Mauvais mot de passe ou login';
                     exit;
                 } else {
                     $exec = mysqli_query($mysqli, "SELECT grade FROM user WHERE login = '".$login."'");
                     $_SESSION['login'] = $login;
                     $_SESSION['password'] = $password;
                     $_SESSION['grade'] = $exec;
-
-                     header('Location:');
-
-                    print_r($_SESSION['grade']);
-                    header('Location:');
+                    header('Location: home');
 
                     exit;
                 }
