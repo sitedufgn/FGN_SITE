@@ -2,18 +2,19 @@
 session_start();
 if(isset($_POST['submit'])) { 
     
-    if(!empty($_POST['login'])) {
-         echo 'nop';
+    if(empty($_POST['login'])) {
+         echo 'Veuillez remplir le login';
     } else {
       
         if(empty($_POST['password'])) {
+          echo 'Veuillez remplir le mot de passe';
         } else {
             $login = htmlentities($_POST['login'], ENT_QUOTES, "ISO-8859-1"); 
 
             $password = htmlentities($_POST['password'], ENT_QUOTES, "ISO-8859-1");
             $password = sha1($password);
           
-            $mysqli = mysqli_connect("localhost", "root", "", "fgn_database");
+            $mysqli = mysqli_connect("localhost", "fmicjead_FGN", "fgn_studio", "fmicjead_fgn_database");
 
             if(!$mysqli){
                 echo "Erreur de connexion à la base de données.";

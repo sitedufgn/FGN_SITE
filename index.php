@@ -21,6 +21,8 @@ if($p === 'home') {
 	require 'asset/pages/connexion.php';
 }elseif($p === 'test') {
 	require 'asset/pages/test.php';
+}elseif($p === 'dashboard') {
+	require 'asset/pages/dashboard.php';
 }
 $content = ob_get_clean();
 require 'asset/pages/template/default.php';
